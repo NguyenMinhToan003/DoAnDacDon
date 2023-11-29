@@ -42,3 +42,21 @@ struct Phuong
 
 void dongGachNgang();
 void dongTieuDe();
+
+void khoiTaoDSTV(ThanhVienPtr& DSTV);
+ThanhVienPtr taoNodeThanhVien(TTTV x);
+void nhapTTThanhVien(TTTV& tv);
+void nhapDSThanhVien(ThanhVienPtr& DSTV);
+void xuatTTThanhVien(TTTV tv);
+void xuatDSThanhVien(ThanhVienPtr DSTV);
+
+void nhapHoKhau(HoKhau& hoKhau);
+void xuatHoKhau(HoKhau hoKhau);
+
+void nhapDSHoKhau(DSHoKhau& dsHoKhau);
+void xuatDSHoKhau(DSHoKhau dsHoKhau);
+
+void nhapTTPhuong(Phuong& phuong);
+void xuatTTPhuong(Phuong phuong);
+void nhapPhuong(Phuong& phuong);
+void xuatPhuong(Phuong phuong);
