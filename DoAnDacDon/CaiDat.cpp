@@ -1,9 +1,9 @@
 #include "Header.h"
 void dongGachNgang() {
-    for (int i = 0; i < 133; i++) {
-        cout << "-";
-    }
-    cout << endl;
+	for (int i = 0; i < 133; i++) {
+		cout << "-";
+	}
+	cout << endl;
 }
 void dongTieuDe() {
 	cout << "|"
@@ -18,17 +18,17 @@ void dongTieuDe() {
 	cout << endl;
 }
 void khoiTaoDSTV(ThanhVienPtr& DSTV) {
-    DSTV = NULL;
+	DSTV = NULL;
 }
 
 ThanhVienPtr taoNodeThanhVien(TTTV x) {
-    ThanhVienPtr p = new ThanhVien;
-    p->data = x;
-    p->next = NULL;
-    return p;
+	ThanhVienPtr p = new ThanhVien;
+	p->data = x;
+	p->next = NULL;
+	return p;
 }
 void nhapTTThanhVien(TTTV& tv) {
-	cout << "Nhap ID thanh vien: ";
+	cout << "\nNhap ID thanh vien : ";
 	cin >> tv.id;
 	cout << "Nhap ho ten thanh vien: ";
 	cin.ignore();
@@ -90,17 +90,15 @@ void xuatTTThanhVien(TTTV tv) {
 }
 
 void nhapHoKhau(HoKhau& hoKhau) {
-	cout << "\nNhap Thong tin Chu Ho  ";
+	cout << "\nNhap Thong tin Chu Ho: ";
 	cin.ignore();
-	cout << "\nNhap Ma Ho Khau : ";
+	cout << "\nNhap Ma Ho Khau: ";
 	cin >> hoKhau.maHoKhau;
-	cout << "\nNhap Ten Chu Ho :";
+	cout << "Nhap Ten Chu Ho: ";
+	cin.ignore();
 	cin.getline(hoKhau.tenChuHo, 20);
-	cin.ignore();
-	cout << "\nNhap Dia Chi Ho Khau : ";
-
+	cout << "Nhap Dia Chi Ho Khau: ";
 	cin.getline(hoKhau.diaChi, 20);
-	cin.ignore();
 	nhapDSThanhVien(hoKhau.dsThanhVien);
 }
 
@@ -113,7 +111,7 @@ void xuatHoKhau(HoKhau hoKhau) {
 			<< right << setw(5) << hoKhau.maHoKhau << "|"
 			<< left << setw(22) << hoKhau.tenChuHo << "|"
 			<< left << setw(22) << hoKhau.diaChi << "|"
-			<< right << setw(8) << hoKhau.dsThanhVien->data.id<< "|"
+			<< right << setw(8) << hoKhau.dsThanhVien->data.id << "|"
 			<< left << setw(22) << hoKhau.dsThanhVien->data.hoTen << "|"
 			<< right << setw(10) << hoKhau.dsThanhVien->data.namSinh << "|"
 			<< left << setw(11) << (hoKhau.dsThanhVien->data.gioiTinh ? "Nam" : "Nu") << "|"
@@ -159,4 +157,63 @@ void xuatPhuong(Phuong phuong) {
 	xuatTTPhuong(phuong);
 	xuatDSHoKhau(phuong.dsHoKhau);
 
+}
+
+HoKhau* timHoKhauBangMa(DSHoKhau dsHoKhau, int maHoKhau) {
+	for (int i = 0; i < dsHoKhau.n; i++) {
+		if (dsHoKhau.ds[i].maHoKhau == maHoKhau) {
+			return &dsHoKhau.ds[i];
+		}
+	}
+
+
+	return nullptr;
+}
+
+void ThemHoKhau(DSHoKhau& dsHoKhau) {
+	if (dsHoKhau.n == MAX) {
+		cout << "Danh sach ho khau da day. Khong the them moi.\n";
+		return;
+	}
+
+	HoKhau hoKhau;
+	cout << "\nNhap Thong tin Ho Khau moi:\n";
+	cout << "Nhap Ma Ho Khau: ";
+	cin >> hoKhau.maHoKhau;
+	cin.ignore();
+	cout << "Nhap Ten Chu Ho: ";
+	cin.getline(hoKhau.tenChuHo, 20);
+	cout << "Nhap Dia Chi: ";
+	cin.getline(hoKhau.diaChi, 20);
+
+	nhapDSThanhVien(hoKhau.dsThanhVien);
+
+	dsHoKhau.ds[dsHoKhau.n] = hoKhau;
+	dsHoKhau.n++;
+
+	cout << "Ho Khau moi da them thanh cong.\n";
+}
+
+//void ThemThanhVienVaoHoKhau(DSHoKhau& dsHoKhau, int maHoKhau, TTTV x) {
+//	HoKhau* hoKhau = timHoKhauBangMa(dsHoKhau, maHoKhau);
+//	if (hoKhau != nullptr) {
+//		ThanhVienPtr thanhVienMoi = taoNodeThanhVien(x);
+//		ThemThanhVien(hoKhau->dsThanhVien, x);
+//		cout << "Them thanh vien moi thanh cong!" << endl;
+//	}
+//	else {
+//		cout << "Khong tim thay ho khau voi ma ho khau " << maHoKhau << endl;
+//	}
+//}
+
+void xoaHoKhauTheoMa(int maHoKhau, DSHoKhau& dsHoKhau) {
+	for (int i = 0; i < dsHoKhau.n; i++) {
+		if (dsHoKhau.ds[i].maHoKhau == maHoKhau) {
+			for (int j = i; j < dsHoKhau.n - 1; j++) {
+				dsHoKhau.ds[j] = dsHoKhau.ds[j + 1];
+			}
+			dsHoKhau.n--;
+			break;
+		}
+	}
 }

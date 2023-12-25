@@ -60,3 +60,11 @@ void nhapTTPhuong(Phuong& phuong);
 void xuatTTPhuong(Phuong phuong);
 void nhapPhuong(Phuong& phuong);
 void xuatPhuong(Phuong phuong);
+
+HoKhau* timHoKhauBangMa(DSHoKhau dsHoKhau, int maHoKhau);
+
+void ThemHoKhau(DSHoKhau& dsHoKhau);
+
+//void ThemThanhVienVaoHoKhau(DSHoKhau& dsHoKhau, int maHoKhau, TTTV x);
+
+void xoaHoKhauTheoMa(int maHoKhau, DSHoKhau& dsHoKhau);
