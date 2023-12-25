@@ -111,11 +111,11 @@ void xuatHoKhau(HoKhau hoKhau) {
 			<< right << setw(5) << hoKhau.maHoKhau << "|"
 			<< left << setw(22) << hoKhau.tenChuHo << "|"
 			<< left << setw(22) << hoKhau.diaChi << "|"
-			<< right << setw(8) << hoKhau.dsThanhVien->data.id << "|"
-			<< left << setw(22) << hoKhau.dsThanhVien->data.hoTen << "|"
-			<< right << setw(10) << hoKhau.dsThanhVien->data.namSinh << "|"
-			<< left << setw(11) << (hoKhau.dsThanhVien->data.gioiTinh ? "Nam" : "Nu") << "|"
-			<< left << setw(24) << hoKhau.dsThanhVien->data.queQuan << "|" << endl;
+			<< right << setw(8) << p->data.id << "|"
+			<< left << setw(22) << p->data.hoTen << "|"
+			<< right << setw(10) << p->data.namSinh << "|"
+			<< left << setw(11) << (p->data.gioiTinh ? "Nam" : "Nu") << "|"
+			<< left << setw(24) << p->data.queQuan << "|" << endl;
 		p = p->next;
 	}
 }
