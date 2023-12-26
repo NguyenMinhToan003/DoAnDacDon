@@ -1,10 +1,9 @@
 #include "Header.h"
 int main() {
-
+	
 	Phuong phuong;
-
 	int option = 1;
-
+	
 	while (option)
 	{
 		cout << "\n1.Tao Phuong. ";
@@ -31,12 +30,12 @@ int main() {
 			int maHoKhau;
 			cout << "\nNhap ma ho khau can tim: ";
 			cin >> maHoKhau;
-
-			HoKhau* hoKhau = timHoKhauBangMa(phuong.dsHoKhau, maHoKhau);
-			if (hoKhau != nullptr) {
+			int chiso = timHoKhauBangMa_Chiso(phuong.dsHoKhau, maHoKhau);
+			if (chiso != -1) {
 				
 				cout << "\nThong tin ho khau tim thay:\n";
-				xuatHoKhau(*hoKhau);
+				dongTieuDe();
+				xuatHoKhau(phuong.dsHoKhau.ds[chiso]);
 			}
 			else {
 				cout << "\nKhong tim thay ho khau co ma " << maHoKhau << endl;
@@ -44,17 +43,16 @@ int main() {
 		}
 		else if (option == 4)
 			ThemHoKhau(phuong.dsHoKhau);
-		/*else if (option == 5) {
+		else if (option == 5) {
 			int maHoKhau;
-			cout << "\nNhap ma ho khau can them: ";
+			cout << "Nhap ma ho khau: ";
 			cin >> maHoKhau;
-			TTTV newMember;
-			nhapTTThanhVien(newMember);
-			ThemThanhVienVaoHoKhau(phuong.dsHoKhau, maHoKhau, newMember);
+
+			themThanhVienVaoHoKhau(phuong.dsHoKhau, maHoKhau);
 
 			xuatDSHoKhau(phuong.dsHoKhau);
 		}
-		else if (option == 6)
+		/*else if (option == 6)
 		{
 			xuatPhuong(phuong);
 			string mshk;
@@ -70,31 +68,39 @@ int main() {
 		{
 			xuatPhuong(phuong);
 			int maHoKhau;
-			cout << "\nNhap ma ho khau can them: ";
+			cout << "\nNhap ma ho khau can xoa: ";
 			cin >> maHoKhau;;
 			xoaHoKhauTheoMa(maHoKhau,phuong.dsHoKhau);
-			cout << "\nXoa HK thanh cong!" << endl;
+			cout << "\nXoa thanh cong!" << endl;
 			xuatPhuong(phuong);
 		}
-		/*else if (option == 8)
+		else if (option == 8)
 		{
 			xuatPhuong(phuong);
-			string msx;
-			cout << "Nhap MHK: ";
-			cin >> msx;
-			sapXepTheoMaHoKhau(phuong.dsHoKhau, msx);
-			cout << "\nSap Xep Theo Ten Thanh Cong!" << endl;
+			int maHoKhau;
+			cout << "Nhap ma ho khau can sap xep: ";
+			cin >> maHoKhau;
+			int index = timHoKhauBangMa_Chiso(phuong.dsHoKhau, maHoKhau);
+			if (index != -1) {
+				sapXepTenThanhVienTrongHoKhau(phuong.dsHoKhau.ds[index]);
+				cout << "Da sap xep thanh vien trong ho khau co ma " << maHoKhau << " theo ten." << endl;
+			}
+			else {
+				cout << "Khong tim thay ho khau có ma " << maHoKhau << "." << endl;
+			}
 			xuatPhuong(phuong);
+			break;
+
 		}
 		else if (option == 9) {
-			docFile("PhuongMoi.txt", phuong);
+			docFileDSHoKhau(phuong, "PhuongMoi.txt");
 			cout << "\nDOC FILE THANH CONG!" << endl;
 		}
 		else if (option == 10)
 		{
-			ghiFile("WritePhuongMoi.txt", phuong);
+			ghiFile(phuong, "Phuong.txt");
 			cout << "\nGHI FILE THANH CONG!" << endl;
-		}*/
+		}
 
 		else if (option == 0) break;
 	}

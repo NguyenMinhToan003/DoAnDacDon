@@ -32,7 +32,7 @@ void nhapTTThanhVien(TTTV& tv) {
 	cin >> tv.id;
 	cout << "Nhap ho ten thanh vien: ";
 	cin.ignore();
-	cin.getline(tv.hoTen, 30);
+	cin >> tv.hoTen;
 	bool isValidYear;
 	do {
 		cout << "Nhap nam sinh thanh vien: ";
@@ -48,7 +48,7 @@ void nhapTTThanhVien(TTTV& tv) {
 	} while (isValidYear == false);
 	cout << "Nhap que quan thanh vien: ";
 	cin.ignore();
-	cin.getline(tv.queQuan, 30);
+	cin >> tv.queQuan;
 	cout << "Nhap gioi tinh (0: Nu, 1: Nam): ";
 	int gender;
 	cin >> gender;
@@ -96,9 +96,9 @@ void nhapHoKhau(HoKhau& hoKhau) {
 	cin >> hoKhau.maHoKhau;
 	cout << "Nhap Ten Chu Ho: ";
 	cin.ignore();
-	cin.getline(hoKhau.tenChuHo, 20);
+	cin >> hoKhau.tenChuHo;
 	cout << "Nhap Dia Chi Ho Khau: ";
-	cin.getline(hoKhau.diaChi, 20);
+	cin >> hoKhau.diaChi;
 	nhapDSThanhVien(hoKhau.dsThanhVien);
 }
 
@@ -159,15 +159,13 @@ void xuatPhuong(Phuong phuong) {
 
 }
 
-HoKhau* timHoKhauBangMa(DSHoKhau dsHoKhau, int maHoKhau) {
+int timHoKhauBangMa_Chiso(DSHoKhau dsHoKhau, int maHoKhau) {
 	for (int i = 0; i < dsHoKhau.n; i++) {
 		if (dsHoKhau.ds[i].maHoKhau == maHoKhau) {
-			return &dsHoKhau.ds[i];
+			return i;
 		}
 	}
-
-
-	return nullptr;
+	return -1;
 }
 
 void ThemHoKhau(DSHoKhau& dsHoKhau) {
@@ -182,9 +180,10 @@ void ThemHoKhau(DSHoKhau& dsHoKhau) {
 	cin >> hoKhau.maHoKhau;
 	cin.ignore();
 	cout << "Nhap Ten Chu Ho: ";
-	cin.getline(hoKhau.tenChuHo, 20);
+	cin >> hoKhau.tenChuHo;
 	cout << "Nhap Dia Chi: ";
-	cin.getline(hoKhau.diaChi, 20);
+	cin.ignore();
+	cin >> hoKhau.diaChi;
 
 	nhapDSThanhVien(hoKhau.dsThanhVien);
 
@@ -194,17 +193,6 @@ void ThemHoKhau(DSHoKhau& dsHoKhau) {
 	cout << "Ho Khau moi da them thanh cong.\n";
 }
 
-//void ThemThanhVienVaoHoKhau(DSHoKhau& dsHoKhau, int maHoKhau, TTTV x) {
-//	HoKhau* hoKhau = timHoKhauBangMa(dsHoKhau, maHoKhau);
-//	if (hoKhau != nullptr) {
-//		ThanhVienPtr thanhVienMoi = taoNodeThanhVien(x);
-//		ThemThanhVien(hoKhau->dsThanhVien, x);
-//		cout << "Them thanh vien moi thanh cong!" << endl;
-//	}
-//	else {
-//		cout << "Khong tim thay ho khau voi ma ho khau " << maHoKhau << endl;
-//	}
-//}
 
 void xoaHoKhauTheoMa(int maHoKhau, DSHoKhau& dsHoKhau) {
 	for (int i = 0; i < dsHoKhau.n; i++) {
@@ -216,4 +204,120 @@ void xoaHoKhauTheoMa(int maHoKhau, DSHoKhau& dsHoKhau) {
 			break;
 		}
 	}
+}
+
+void themThanhVienVaoHoKhau(DSHoKhau& dsHoKhau, int maHoKhau) {
+	int chisoHoKhau = timHoKhauBangMa_Chiso(dsHoKhau, maHoKhau);
+	if (chisoHoKhau != -1) {
+		TTTV tv;
+		nhapTTThanhVien(tv);
+		ThemThanhVien(dsHoKhau.ds[chisoHoKhau].dsThanhVien, tv);
+		cout << "Them thanh vien moi thanh cong!" << endl;
+	}
+	else {
+		cout << "Khong tim thay ho khau voi ma ho khau " << maHoKhau << endl;
+	}
+}
+
+
+void sapXepTenThanhVienTrongHoKhau(HoKhau& hoKhau) {
+	
+	if (hoKhau.dsThanhVien == nullptr || hoKhau.dsThanhVien->next == nullptr) {
+		return;
+	}
+
+	
+	ThanhVienPtr current = hoKhau.dsThanhVien;
+	while (current != nullptr) {
+		ThanhVienPtr minNode = current;
+		ThanhVienPtr temp = current->next;
+
+		while (temp != nullptr) {
+			if (temp->data.hoTen < minNode->data.hoTen) {
+				minNode = temp;
+			}
+			temp = temp->next;
+		}
+
+		if (minNode != current) {
+			
+			TTTV tempData = current->data;
+			current->data = minNode->data;
+			minNode->data = tempData;
+		}
+
+		current = current->next;
+	}
+}
+
+void docFileDSHoKhau(Phuong& phuong, const string& tenFile) {
+	ifstream file(tenFile);
+	if (!file.is_open()) {
+		cout << "Khong the mo file: " << tenFile << endl;
+		return;
+	}
+	file >> phuong.tenPhuong;
+	file.ignore();
+	file >> phuong.dsHoKhau.n;
+	file.ignore(); 
+
+	for (int i = 0; i < phuong.dsHoKhau.n; i++) {
+		HoKhau& hoKhau = phuong.dsHoKhau.ds[i];
+
+		file >> hoKhau.maHoKhau;
+		file.ignore(); 
+		
+		file.getline(hoKhau.tenChuHo, 30);
+		
+		file.getline(hoKhau.diaChi, 30);
+		int b;
+		file >> b;
+		file.ignore();
+		for (int i = 0; i < b; i++) {
+			TTTV newThanhVien;
+			file >> newThanhVien.id;
+			file.ignore();
+			file.getline(newThanhVien.hoTen, 30);
+			file >> newThanhVien.namSinh;
+			file.ignore();
+			file.getline(newThanhVien.queQuan, 30);
+			int gioiTinh;
+			file >> gioiTinh;
+			file.ignore();
+			newThanhVien.gioiTinh = gioiTinh != 0;
+			ThemThanhVien(hoKhau.dsThanhVien, newThanhVien);
+		}
+	}
+
+	file.close();
+}
+
+
+void ghiFile(const Phuong& phuong, const char* fileName) {
+	ofstream file(fileName);
+	if (!file) {
+		cout << "Error opening file!";
+		return;
+	}
+	file << phuong.tenPhuong << endl;
+	file << phuong.dsHoKhau.n << endl;
+	for (int i = 0; i < phuong.dsHoKhau.n; i++) {
+		
+		file << phuong.dsHoKhau.ds[i].maHoKhau << endl;
+		file << phuong.dsHoKhau.ds[i].tenChuHo << endl;
+		file << phuong.dsHoKhau.ds[i].diaChi << endl;
+		
+		ThanhVienPtr p = phuong.dsHoKhau.ds[i].dsThanhVien;
+		while (p != NULL) {
+			file << p->data.id << endl;
+			file << p->data.hoTen << endl;
+			file << p->data.namSinh << endl;
+			file << p->data.gioiTinh<< endl;
+			file << p->data.queQuan << endl;
+			p = p->next;
+		}
+		file << endl;
+	}
+
+	file.close();
 }

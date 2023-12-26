@@ -3,18 +3,16 @@
 #include <iomanip>
 #include <fstream>
 #include <string>
-#include <random>
-
 
 const int MAX = 100;
 using namespace std;
 struct TTTV
 {
-	int id;
+	int id{};
 	char hoTen[30];
-	int namSinh;
+	int namSinh{};
 	char queQuan[30];
-	bool gioiTinh;
+	bool gioiTinh{};
 };
 struct ThanhVien {
 	TTTV data;
@@ -24,11 +22,10 @@ typedef ThanhVien* ThanhVienPtr;
 
 struct HoKhau
 {
-	int maHoKhau;
-	char tenChuHo[20];
-	char diaChi[20];
-	ThanhVienPtr dsThanhVien;
-
+	int maHoKhau{};
+	char tenChuHo[30];
+	char diaChi[30];
+	ThanhVienPtr dsThanhVien {};
 };
 struct DSHoKhau {
 	int n = 0;
@@ -36,7 +33,7 @@ struct DSHoKhau {
 };
 struct Phuong
 {
-	char tenPhuong[20];
+	char tenPhuong[20]{};
 	DSHoKhau dsHoKhau;
 };
 
@@ -61,10 +58,16 @@ void xuatTTPhuong(Phuong phuong);
 void nhapPhuong(Phuong& phuong);
 void xuatPhuong(Phuong phuong);
 
-HoKhau* timHoKhauBangMa(DSHoKhau dsHoKhau, int maHoKhau);
+int timHoKhauBangMa_Chiso(DSHoKhau dsHoKhau, int maHoKhau);
 
 void ThemHoKhau(DSHoKhau& dsHoKhau);
 
-//void ThemThanhVienVaoHoKhau(DSHoKhau& dsHoKhau, int maHoKhau, TTTV x);
+void themThanhVienVaoHoKhau(DSHoKhau& dsHoKhau, int maHoKhau);
 
 void xoaHoKhauTheoMa(int maHoKhau, DSHoKhau& dsHoKhau);
+
+void sapXepTenThanhVienTrongHoKhau(HoKhau& hoKhau);
+
+void docFileDSHoKhau(Phuong& phuong, const string& tenFile);
+
+void ghiFile(const Phuong& phuong, const char* fileName);
