@@ -52,10 +52,10 @@ int main() {
 
 			xuatDSHoKhau(phuong.dsHoKhau);
 		}
-		/*else if (option == 6)
+		else if (option == 6)
 		{
 			xuatPhuong(phuong);
-			string mshk;
+			int mshk;
 			int idtv;
 			cout << "Nhap MHK: ";
 			cin >> mshk;
@@ -63,7 +63,7 @@ int main() {
 			cin >> idtv;
 			xoaThanhVien(phuong.dsHoKhau, mshk, idtv);
 			xuatPhuong(phuong);
-		}*/
+		}
 		else if (option == 7)
 		{
 			xuatPhuong(phuong);

@@ -1,4 +1,4 @@
-#include "Header.h"
+﻿#include "Header.h"
 void dongGachNgang() {
 	for (int i = 0; i < 133; i++) {
 		cout << "-";
@@ -206,6 +206,48 @@ void xoaHoKhauTheoMa(int maHoKhau, DSHoKhau& dsHoKhau) {
 	}
 }
 
+void xoaThanhVien(DSHoKhau& dsHoKhau, int maHoKhau, int id) {
+	// Tìm hộ khẩu chứa thành viên cần xóa
+	for (int i = 0; i < dsHoKhau.n; i++)
+	{
+		if (dsHoKhau.ds[i].maHoKhau == maHoKhau)
+		{
+			ThanhVienPtr thanhVien = dsHoKhau.ds[i].dsThanhVien;
+			ThanhVienPtr prev = nullptr;
+
+			// Duyệt qua danh sách thành viên trong hộ khẩu
+			while (thanhVien != nullptr)
+			{
+				// Nếu tìm thấy thành viên cần xóa
+				if (thanhVien->data.id == id)
+				{
+					// Xóa thành viên khỏi danh sách
+					if (prev == nullptr)
+					{
+						dsHoKhau.ds[i].dsThanhVien = thanhVien->next;
+					}
+					else {
+						prev->next = thanhVien->next;
+					}
+				}
+				else
+				{
+					cout << "KHONG TIM THAY TV CAN XOA!.";
+					return;
+				}
+				prev = thanhVien;
+				thanhVien = thanhVien->next;
+			}
+			break; // Thoát khỏi vòng lặp khi tìm thấy hộ khẩu
+		}
+		else
+		{
+			cout << "KHONG TIM THAY HK!";
+			return;
+		}
+	}
+}
+
 void themThanhVienVaoHoKhau(DSHoKhau& dsHoKhau, int maHoKhau) {
 	int chisoHoKhau = timHoKhauBangMa_Chiso(dsHoKhau, maHoKhau);
 	if (chisoHoKhau != -1) {
@@ -221,12 +263,12 @@ void themThanhVienVaoHoKhau(DSHoKhau& dsHoKhau, int maHoKhau) {
 
 
 void sapXepTenThanhVienTrongHoKhau(HoKhau& hoKhau) {
-	
+
 	if (hoKhau.dsThanhVien == nullptr || hoKhau.dsThanhVien->next == nullptr) {
 		return;
 	}
 
-	
+
 	ThanhVienPtr current = hoKhau.dsThanhVien;
 	while (current != nullptr) {
 		ThanhVienPtr minNode = current;
@@ -240,7 +282,7 @@ void sapXepTenThanhVienTrongHoKhau(HoKhau& hoKhau) {
 		}
 
 		if (minNode != current) {
-			
+
 			TTTV tempData = current->data;
 			current->data = minNode->data;
 			minNode->data = tempData;
@@ -259,17 +301,18 @@ void docFileDSHoKhau(Phuong& phuong, const string& tenFile) {
 	file >> phuong.tenPhuong;
 	file.ignore();
 	file >> phuong.dsHoKhau.n;
-	file.ignore(); 
+	file.ignore();
 
 	for (int i = 0; i < phuong.dsHoKhau.n; i++) {
 		HoKhau& hoKhau = phuong.dsHoKhau.ds[i];
 
 		file >> hoKhau.maHoKhau;
-		file.ignore(); 
-		
+		file.ignore();
+
 		file.getline(hoKhau.tenChuHo, 30);
-		
+
 		file.getline(hoKhau.diaChi, 30);
+
 		int b;
 		file >> b;
 		file.ignore();
@@ -302,17 +345,17 @@ void ghiFile(const Phuong& phuong, const char* fileName) {
 	file << phuong.tenPhuong << endl;
 	file << phuong.dsHoKhau.n << endl;
 	for (int i = 0; i < phuong.dsHoKhau.n; i++) {
-		
+
 		file << phuong.dsHoKhau.ds[i].maHoKhau << endl;
 		file << phuong.dsHoKhau.ds[i].tenChuHo << endl;
 		file << phuong.dsHoKhau.ds[i].diaChi << endl;
-		
+
 		ThanhVienPtr p = phuong.dsHoKhau.ds[i].dsThanhVien;
 		while (p != NULL) {
 			file << p->data.id << endl;
 			file << p->data.hoTen << endl;
 			file << p->data.namSinh << endl;
-			file << p->data.gioiTinh<< endl;
+			file << p->data.gioiTinh << endl;
 			file << p->data.queQuan << endl;
 			p = p->next;
 		}

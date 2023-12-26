@@ -64,6 +64,8 @@ void ThemHoKhau(DSHoKhau& dsHoKhau);
 
 void themThanhVienVaoHoKhau(DSHoKhau& dsHoKhau, int maHoKhau);
 
+void xoaThanhVien(DSHoKhau& dsHoKhau, int maHoKhau, int id);
+
 void xoaHoKhauTheoMa(int maHoKhau, DSHoKhau& dsHoKhau);
 
 void sapXepTenThanhVienTrongHoKhau(HoKhau& hoKhau);
