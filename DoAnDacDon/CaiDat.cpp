@@ -225,27 +225,25 @@ void xoaThanhVien(DSHoKhau& dsHoKhau, int maHoKhau, int id) {
 					if (prev == nullptr)
 					{
 						dsHoKhau.ds[i].dsThanhVien = thanhVien->next;
+						delete thanhVien;
 					}
 					else {
 						prev->next = thanhVien->next;
+						delete thanhVien;
 					}
-				}
-				else
-				{
-					cout << "KHONG TIM THAY TV CAN XOA!.";
+					cout << "Da xoa thanh vien co ID " << id << " khoi ho khau." << endl;
 					return;
 				}
+
 				prev = thanhVien;
 				thanhVien = thanhVien->next;
 			}
-			break; // Thoát khỏi vòng lặp khi tìm thấy hộ khẩu
-		}
-		else
-		{
-			cout << "KHONG TIM THAY HK!";
+
+			cout << "Khong tim thay thanh vien co ID " << id << " trong ho khau." << endl;
 			return;
 		}
 	}
+	cout << "Khong tim thay ho khau co ma " << maHoKhau << "." << endl;
 }
 
 void themThanhVienVaoHoKhau(DSHoKhau& dsHoKhau, int maHoKhau) {

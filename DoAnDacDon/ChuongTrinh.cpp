@@ -54,11 +54,23 @@ int main() {
 		}
 		else if (option == 6)
 		{
-			xuatPhuong(phuong);
+			/*xuatPhuong(phuong);
 			int mshk;
 			int idtv;
 			cout << "Nhap MHK: ";
 			cin >> mshk;
+			cout << "Nhap ID thanh vien: ";
+			cin >> idtv;
+			xoaThanhVien(phuong.dsHoKhau, mshk, idtv);
+			xuatPhuong(phuong);*/
+
+			//test
+
+			xuatPhuong(phuong);
+			int mshk=1111;
+			int idtv;
+			cout << "Nhap MHK: "<<mshk<<endl;
+			//cin >> mshk;
 			cout << "Nhap ID thanh vien: ";
 			cin >> idtv;
 			xoaThanhVien(phuong.dsHoKhau, mshk, idtv);
