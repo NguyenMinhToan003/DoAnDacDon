@@ -27,7 +27,7 @@ int main() {
 		else if (option == 2)
 			xuatPhuong(phuong);
 		else if (option == 3) {
-			int maHoKhau;
+			string maHoKhau;
 			cout << "\nNhap ma ho khau can tim: ";
 			cin >> maHoKhau;
 			int chiso = timHoKhauBangMa_Chiso(phuong.dsHoKhau, maHoKhau);
@@ -44,7 +44,7 @@ int main() {
 		else if (option == 4)
 			ThemHoKhau(phuong.dsHoKhau);
 		else if (option == 5) {
-			int maHoKhau;
+			string maHoKhau;
 			cout << "Nhap ma ho khau: ";
 			cin >> maHoKhau;
 
@@ -54,32 +54,20 @@ int main() {
 		}
 		else if (option == 6)
 		{
-			/*xuatPhuong(phuong);
-			int mshk;
+			xuatPhuong(phuong);
+			string maHoKhau;
 			int idtv;
 			cout << "Nhap MHK: ";
-			cin >> mshk;
+			cin >> maHoKhau;
 			cout << "Nhap ID thanh vien: ";
 			cin >> idtv;
-			xoaThanhVien(phuong.dsHoKhau, mshk, idtv);
-			xuatPhuong(phuong);*/
-
-			//test
-
-			xuatPhuong(phuong);
-			int mshk=1111;
-			int idtv;
-			cout << "Nhap MHK: "<<mshk<<endl;
-			//cin >> mshk;
-			cout << "Nhap ID thanh vien: ";
-			cin >> idtv;
-			xoaThanhVien(phuong.dsHoKhau, mshk, idtv);
+			xoaThanhVien(phuong.dsHoKhau, maHoKhau, idtv);
 			xuatPhuong(phuong);
 		}
 		else if (option == 7)
 		{
 			xuatPhuong(phuong);
-			int maHoKhau;
+			string maHoKhau;
 			cout << "\nNhap ma ho khau can xoa: ";
 			cin >> maHoKhau;;
 			xoaHoKhauTheoMa(maHoKhau,phuong.dsHoKhau);
@@ -89,7 +77,7 @@ int main() {
 		else if (option == 8)
 		{
 			xuatPhuong(phuong);
-			int maHoKhau;
+			string maHoKhau;
 			cout << "Nhap ma ho khau can sap xep: ";
 			cin >> maHoKhau;
 			int index = timHoKhauBangMa_Chiso(phuong.dsHoKhau, maHoKhau);

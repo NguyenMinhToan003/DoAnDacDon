@@ -22,7 +22,8 @@ typedef ThanhVien* ThanhVienPtr;
 
 struct HoKhau
 {
-	int maHoKhau{};
+	string maHoKhau{};
+	int idChuHo;
 	char tenChuHo[30];
 	char diaChi[30];
 	ThanhVienPtr dsThanhVien {};
@@ -58,15 +59,16 @@ void xuatTTPhuong(Phuong phuong);
 void nhapPhuong(Phuong& phuong);
 void xuatPhuong(Phuong phuong);
 
-int timHoKhauBangMa_Chiso(DSHoKhau dsHoKhau, int maHoKhau);
+int timHoKhauBangMa_Chiso(DSHoKhau dsHoKhau, string maHoKhau);
 
 void ThemHoKhau(DSHoKhau& dsHoKhau);
 
-void themThanhVienVaoHoKhau(DSHoKhau& dsHoKhau, int maHoKhau);
+void themThanhVienVaoHoKhau(DSHoKhau& dsHoKhau, string maHoKhau);
 
-void xoaThanhVien(DSHoKhau& dsHoKhau, int maHoKhau, int id);
+void xoaThanhVien(DSHoKhau& dsHoKhau, string maHoKhau, int id);
+
 ThanhVienPtr timThanhVienTheoID(DSHoKhau danhSachHoKhau, int id);
-void xoaHoKhauTheoMa(int maHoKhau, DSHoKhau& dsHoKhau);
+void xoaHoKhauTheoMa(string maHoKhau, DSHoKhau& dsHoKhau);
 
 void sapXepTenThanhVienTrongHoKhau(HoKhau& hoKhau);
 
