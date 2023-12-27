@@ -370,7 +370,8 @@ void xoaThanhVien(DSHoKhau& dsHoKhau, string maHoKhau, int id)
 			}
 			else {
 				dsHoKhau.ds[ma].idChuHo = idtvThayThe;
-				strncpy(dsHoKhau.ds[ma].tenChuHo, thanhVienThayThe->data.hoTen, 20);
+				strncpy(dsHoKhau.ds[ma].tenChuHo, thanhVienThayThe->data.hoTen, 30);
+				strncpy(dsHoKhau.ds[ma].diaChi, thanhVienThayThe->data.queQuan, 30);
 				dsHoKhau.ds[ma].dsThanhVien = thanhVienThayThe->next;
 				delete thanhVienThayThe;
 				
@@ -401,4 +402,3 @@ void xoaThanhVien(DSHoKhau& dsHoKhau, string maHoKhau, int id)
 	}
 
 }
-
