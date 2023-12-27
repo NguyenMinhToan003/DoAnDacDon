@@ -221,6 +221,8 @@ void xoaThanhVien(DSHoKhau& dsHoKhau, int maHoKhau, int id) {
 				// Nếu tìm thấy thành viên cần xóa
 				if (thanhVien->data.id == id)
 				{
+					//nhap if xoa chu ho
+					
 					// Xóa thành viên khỏi danh sách
 					if (prev == nullptr)
 					{
@@ -238,12 +240,23 @@ void xoaThanhVien(DSHoKhau& dsHoKhau, int maHoKhau, int id) {
 				prev = thanhVien;
 				thanhVien = thanhVien->next;
 			}
-
 			cout << "Khong tim thay thanh vien co ID " << id << " trong ho khau." << endl;
 			return;
 		}
 	}
 	cout << "Khong tim thay ho khau co ma " << maHoKhau << "." << endl;
+}
+ThanhVienPtr timThanhVienTheoID(DSHoKhau danhSachHoKhau, int id) {
+	for (int i = 0; i < danhSachHoKhau.n; i++) {
+		ThanhVienPtr current = danhSachHoKhau.ds[i].dsThanhVien;
+		while (current != nullptr) {
+			if (current->data.id == id) {
+				return current;
+			}
+			current = current->next;
+		}
+	}
+	return nullptr;
 }
 
 void themThanhVienVaoHoKhau(DSHoKhau& dsHoKhau, int maHoKhau) {
